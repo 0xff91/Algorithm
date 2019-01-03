@@ -83,8 +83,11 @@ int main(int argc, char const *argv[])
     char word[32];
     int i = 0;
 
+    // 这样的话后面不可以带空格
+    // 如果带空格，那么scanf会一直等待输入
     do {
         scanf("%s", word);
+        printf("%s", word);
         words[i] = (char *)malloc(strlen(word) + 1);
         memcpy(words[i], word, strlen(word) + 1);
         i++;
@@ -96,6 +99,7 @@ int main(int argc, char const *argv[])
         } else {
             printf("%s ", words[i]);
         }
+        free(words[i]);
     }
     return 0;
 }
