@@ -45,7 +45,8 @@ scanf("%s", a);
 
 
 
-在执行完scanf之后，stdin缓冲区中一般还有一个回车，应该使用getchar或者fflush(stdin)清除掉，如果下次需要读取一个字符或者字符串的话，读取数字则无所谓了。
+在执行完scanf之后，stdin缓冲区中一般还有一个回车，应该使用getchar或者fflush(stdin)清除掉，如果下次需要读取一个字符或者字符串的话，读取数字则无所谓了。  
+
 
 ### gets, puts
 
