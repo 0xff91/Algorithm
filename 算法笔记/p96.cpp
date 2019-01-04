@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * 单词倒序
@@ -51,7 +51,6 @@
 
 //     printf("%s\n", str);
 
-
 //     // 每个单词翻转
 //     int count = 0;
 //     int j = 0;
@@ -72,14 +71,16 @@
 //     while (str[j++] == ' ');
 //     printf("%s", str + j - 1);
 
-
+// ok
 //     return 0;
+//
+//
 // }
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
     /* code */
-    char *words[128];
+    char* words[128];
     char word[32];
     int i = 0;
 
@@ -88,10 +89,10 @@ int main(int argc, char const *argv[])
     do {
         scanf("%s", word);
         printf("%s", word);
-        words[i] = (char *)malloc(strlen(word) + 1);
+        words[i] = (char*)malloc(strlen(word) + 1);
         memcpy(words[i], word, strlen(word) + 1);
         i++;
-    } while(getchar() != '\n');
+    } while (getchar() != '\n');
 
     for (i--; i >= 0; i--) {
         if (i == 0) {
@@ -103,4 +104,3 @@ int main(int argc, char const *argv[])
     }
     return 0;
 }
-
