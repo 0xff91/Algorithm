@@ -13,6 +13,16 @@
 > 
 > 下面主要是记录自己需要的一些东西
 
+## 常用函数
+
+ 1. memset
+    头文件： string.h
+    原型：
+        void *memset(void *s, int c, size_t n);
+ 2. memcpy
+    头文件： string.h
+    原型：
+        void *memcpy(void *dest, const void *src, size_t n);
 
 ## 排序
 
@@ -29,6 +39,11 @@ void qsort(
         int (*compar)(const void *, const void *)
     );
 ```
+如果compar返回值小于0（< 0），那么p1所指向元素会被排在p2所指向元素的前面
+如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定
+如果compar返回值大于0（> 0），那么p1所指向元素会被排在p2所指向元素的后面
+
+注意qsort的cmpar函数，p1与p2的地址是在base基础上加上一个指定的数字之后传入的，所以p1与p2不是数组中的元素的类型，而是数组中元素的地址
 
 ## 变量
 

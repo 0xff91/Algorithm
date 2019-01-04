@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * 这是一道很直白的题目，就是写起来稍微麻烦些，没有什么算法
@@ -52,13 +53,28 @@ typedef struct students
 } Students;
 
 // 排名函数
-int cmp(const void *s1, const void *s2)
+static int cmp(const void *s1, const void *s2)
 {
-    if (((ptr_s_info)s1)->score != ((ptr_s_info)s2)->score) {
-        return ((ptr_s_info)s1)->score > ((ptr_s_info)s2)->score;
-    } else {
-        return ((ptr_s_info)s2)->s_id > ((ptr_s_info)s2)->s_id;
+
+    if ((*(ptr_s_info *)s1)->score != (*(ptr_s_info *)s2)->score)
+    {
+        if ((*(ptr_s_info *)s1)->score > (*(ptr_s_info *)s2)->score)
+            return -1;
+        else
+            return 1;
     }
+    else
+    {
+        if ((*(ptr_s_info *)s2)->s_id != (*(ptr_s_info *)s2)->s_id)
+        {
+            if ((*(ptr_s_info *)s2)->s_id > (*(ptr_s_info *)s2)->s_id)
+                return 1;
+            else
+                return -1;
+        }
+    }
+
+    return 0;
 }
 
 int main(int argc, char *argv[])
@@ -70,11 +86,15 @@ int main(int argc, char *argv[])
 
     int room_stds; // 教室学生人数
     int i = 0;
+    int j = 0;
+
+    /** 输入数据 **/
 
     // 考场总数
     scanf("%d", &students.total_rooms);
     students.rooms = (ptr_r_info *)malloc(sizeof(ptr_r_info) * students.total_rooms);
 
+    // 每个考场学生的id以及分数
     for (i = 0; i < students.total_rooms; i++)
     {
         students.rooms[i] = (ptr_r_info)malloc(sizeof(r_info));
@@ -82,10 +102,9 @@ int main(int argc, char *argv[])
         scanf("%d", &room_stds);
         students.total_students += room_stds;
         students.rooms[i]->s_num = room_stds;
-        students.rooms[i]->r_id = i;
+        students.rooms[i]->r_id = i + 1;
         students.rooms[i]->students = (ptr_s_info *)malloc(sizeof(ptr_s_info) * room_stds);
 
-        int j = 0;
         for (j = 0; j < room_stds; j++)
         {
             students.rooms[i]->students[j] = (ptr_s_info)malloc(sizeof(s_info));
@@ -96,15 +115,43 @@ int main(int argc, char *argv[])
         }
     }
 
-    students.all_students = (ptr_s_info *)malloc(sizeof(ptr_s_info) * students.total_students);
+    /** 排名 **/
 
-
+    // 对每个教室的学生按照分数和学号进行排名
     for (i = 0; i < students.total_rooms; i++)
     {
         // 每个教室进行排名
         qsort(students.rooms[i]->students, students.rooms[i]->s_num, sizeof(ptr_s_info), cmp);
+        for (j = 0; j < students.rooms[i]->s_num; j++) {
+            students.rooms[i]->students[j]->room_range = j + 1;
+        }
     }
-    
 
+    // 所有学生放一块
+    students.all_students = (ptr_s_info *)malloc(sizeof(ptr_s_info) * students.total_students);
+
+    // 所有学生放一块进行排名
+    int t = 0;
+    for (i = 0; i < students.total_rooms; i++)
+    {
+        for (j = 0; j < students.rooms[i]->s_num; j++)
+        {
+            students.all_students[t] = (ptr_s_info)malloc(sizeof(s_info));
+            memcpy(students.all_students[t], students.rooms[i]->students[j], sizeof(s_info));
+            t++;
+        }
+    }
+
+    for (i = 0; i < students.total_students; i++)
+    {
+        printf("all: %d %d\n", students.all_students[i]->s_id, students.all_students[i]->score);
+    }
+    // 所有学生排序
+    qsort(students.all_students, students.total_students, sizeof(ptr_s_info), cmp);
+
+    for (i = 0; i < students.total_students; i++)
+    {
+        printf("%d %d %d %d\n", students.all_students[i]->s_id, i + 1, students.all_students[i]->room, students.all_students[i]->room_range);
+    }
     return 0;
 }
