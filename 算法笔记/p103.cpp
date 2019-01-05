@@ -142,10 +142,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    for (i = 0; i < students.total_students; i++)
-    {
-        printf("all: %d %d\n", students.all_students[i]->s_id, students.all_students[i]->score);
-    }
     // 所有学生排序
     qsort(students.all_students, students.total_students, sizeof(ptr_s_info), cmp);
 
