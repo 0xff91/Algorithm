@@ -55,8 +55,9 @@ void qsort(
 1. 输入数字
 
 ```c
-scanf("%d%d%d", &a, &b, &c);
+scanf("%d%d%d", &a, &b, &c); 
 ```
+
 
 以空格或者换行作为分隔符
 
