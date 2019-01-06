@@ -13,7 +13,7 @@ char hash_table[maxn] = {0};
 void genarate(int index)
 {
     // 边界
-    if (index == n+1)
+    if (index == n + 1)
     {
         for (int i = 1; i <= n; i++)
         {
@@ -27,12 +27,12 @@ void genarate(int index)
     for (int i = 1; i <= n; i++)
     {
         // 第一位开始输出
-        if (!hash_table[i]) 
+        if (!hash_table[i])
         {
             // 如果该位没有被使用，那么可以使用该位
             p[index] = i;
             hash_table[i] = 1;
-            genarate(index+1);
+            genarate(index + 1);
             hash_table[i] = 0;
         }
     }
