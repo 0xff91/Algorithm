@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <algorithm>
 
 typedef struct commodity
 {
