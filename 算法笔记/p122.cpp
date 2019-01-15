@@ -23,7 +23,7 @@ int main(int argc, char const* argv[])
     sections s;
 
     scanf("%d", &n);
-
+ 
     s = (sections)malloc(sizeof(section) * n);
 
     for (int i = 0; i < n; i++) {
@@ -46,5 +46,5 @@ int main(int argc, char const* argv[])
 
     free(s);
 
-    return 0; //
+    return 0;
 }
