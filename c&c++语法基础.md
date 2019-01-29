@@ -19,11 +19,96 @@
     头文件： string.h
     原型：
         void *memset(void *s, int c, size_t n);
+
  2. memcpy
     头文件： string.h
     原型：
         void *memcpy(void *dest, const void *src, size_t n);
 
+ 3. qsort
+    头文件：stdlib.h
+    原型：
+    ```c
+      void qsort(
+              void *base,
+              size_t nmemb,
+              size_t size,
+              int (*compar)(const void *, const void *)
+          );
+    ```
+    说明：
+      如果compar返回值小于0（< 0），那么p1所指向元素会被排在p2所指向元素的前面
+      如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定
+      如果compar返回值大于0（> 0），那么p1所指向元素会被排在p2所指向元素的后面
+
+      注意qsort的cmpar函数，p1与p2的地址是在base基础上加上一个指定的数字之后传入的，所以p1与p2（不是\*p2，\*p2表示p2所指的一个字节）不是数组中的元素的类型，而是数组中元素的首地址，因此我们需要先把他们转换成数组中元素类型的指针(type *)p1，然后在取数组中元素((type *)p1)->...
+
+ 4. 数学函数：
+    头文件： math.h
+    包含：
+     1. 三角函数：
+       ```c
+       double sin/cos/tan(double)   
+       ```
+     2. 反三角函数：
+       ```c
+        double asin/acos/atan(double)
+        double atan2(double, double)
+       ```
+     3. 双曲三角函数
+       ```c
+        double sinh (double);
+        double cosh (double);
+        double tanh (double);
+       ```
+     4. 指数与对数
+       ```c
+        double frexp(double value,int *exp);这是一个将value值拆分成小数部分f和（以2为底的）指数部分exp，并返回小数部分f，即f*2^exp。其中f取值在0.5~1.0范围或者0。
+        double ldexp(double x,int exp);这个函数刚好跟上面那个frexp函数功能相反，它的返回值是x*2^exp
+        double modf(double value,double *iptr);拆分value值，返回它的小数部分，iptr指向整数部分。
+        double log (double); 以e为底的对数
+        double log10 (double);以10为底的对数
+        double pow(double x,double y);计算x的y次幂
+        float powf(float x,float y); 功能与pow一致，只是输入与输出皆为单精度浮点数
+        double exp (double);求取自然数e的幂
+        double sqrt (double);开平方根
+       ```
+
+     5. 取整
+       ```c
+        double ceil (double); 取上整，返回不比x小的最小整数
+        double floor (double); 取下整，返回不比x大的最大整数，即高斯函数[x]
+       ```
+
+     6. 绝对值
+       ```c
+        int abs(int i); 求整型的绝对值
+        double fabs (double);求实型的绝对值
+        double cabs(struct complex znum);求复数的绝对值
+       ```
+     7. 标准化浮点数
+       ```c
+        double frexp (double f,int *p); 标准化浮点数，f = x * 2^p，已知f求x,p (x介于[0.5,1])
+        double ldexp (double x,int p); 与frexp相反，已知x,p求f
+       ```
+
+     8. 取整与取余
+       ```c
+        double modf (double,double*); 将参数的整数部分通过指针回传，返回小数部分
+        double fmod (double,double); 返回两参数相除的余数
+       ```
+     9. 其他
+       ```c
+        double hypot(double x,double y);已知直角三角形两个直角边长度，求斜边长度
+        double ldexp(double x,int exponent);计算x*（2的指数幂）
+        double poly(double x,int degree,double coeffs []);计算多项式
+        int matherr(struct exception *e);数学错误计算处理程序
+       ```
+
+## 常用头文件
+
+ 1. math.h (c)
+    double sin(double)
 ## 排序
 
 ### qsort
